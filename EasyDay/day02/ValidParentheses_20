@@ -1,0 +1,24 @@
+////20.有效的括号
+//思路是利用栈
+//每次遇到一个左括号，就把一个右括号入栈；每碰到一个右括号，就从栈中取出顶端元素，来判断二者是否相等，相等则继续遍历，不等则返回false
+//到最后遍历结束栈中有元素或遍历到右括号时，栈为空，均返回false
+class Solution {
+    public boolean isValid(String s) {
+        //Character是char的包装类型
+        //Stack是栈
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0;i<s.length();i++){
+            //charAT是返回指定索引处的字符
+            if (s.charAt(i)=='('){
+                stack.push(')');
+            }else if (s.charAt(i)=='['){
+                stack.push(']');
+            }else if (s.charAt(i)=='{'){
+                stack.push('}');
+            }else if (stack.isEmpty() || stack.pop()!=s.charAt(i)){
+                return false;
+            }
+        }
+        return stack.isEmpty();
+    }
+}
