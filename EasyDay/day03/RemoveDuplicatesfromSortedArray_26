@@ -1,0 +1,19 @@
+package easyday.day03;
+//26.删除有序数组中的重复项
+//设置两个“指针p,q”
+//当p，q位置的值相同时，q继续向前，当p，q值不相同时，把q位置对应的值赋值给p+1位置的值，依此类推，直到q扫描到数组结尾
+public class RemoveDuplicatesfromSortedArray_26 {
+    public int removeDuplicates(int[] nums) {
+        if (nums==null || nums.length==0)
+            return 0;
+        int p=0,q=1;
+        while (q<nums.length){
+            if (nums[p]!=nums[q]){
+                nums[p+1]=nums[q];
+                p+=1;
+            }
+            q++;
+        }
+        return p+1;
+    }
+}
