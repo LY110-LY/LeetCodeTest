@@ -1,0 +1,45 @@
+package day06;
+
+/**
+ * Created by liangyi on 2022/6/27.
+ */
+//108. 将有序数组转换为二叉搜索树
+public class ConvertSortedArrayToBinarySearchTree_108 {
+//采用递归
+//每次选数组中中间的数为二叉树的根结点（向下取整）
+//当low的值>high的值时，证明已经没有数字可以放至二叉树，返回null
+
+
+//      Definition for a binary tree node.
+      public class TreeNode {
+          int val;
+          TreeNode left;
+          TreeNode right;
+          TreeNode() {}
+          TreeNode(int val) { this.val = val; }
+          TreeNode(int val, TreeNode left, TreeNode right) {
+              this.val = val;
+              this.left = left;
+              this.right = right;
+          }
+      }
+
+
+    public TreeNode sortedArrayToBST(int[] nums) {
+        TreeNode root = new TreeNode();
+        int high = nums.length;
+        int low = 0;
+        TreeNode change = change(nums, low, high);
+        return change;
+    }
+        public TreeNode change(int[] nums, int low, int high){
+          if (low>high){
+              return null;
+          }
+            int len = low + (high - low)/2;
+            TreeNode root = new TreeNode(nums[len]);
+            root.left=change(nums,low,len-1);
+            root.right=change(nums,len+1,high);
+            return root;
+        }
+}
