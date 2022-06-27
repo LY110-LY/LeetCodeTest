@@ -1,0 +1,19 @@
+//这个题暴力不给我A
+//用了动态规划的思想
+//每一个dp[i]表示从头开始到prices[i]的最小值，这样就可以保证当前价格出售时，购买价格是之前几天里最低的
+//每一个dp[i]=min(dp[i-1],prices[i])
+//最后找出差值最大值即可
+class Solution {
+    public int maxProfit(int[] prices) {
+        int[] dp = new int[prices.length];
+        dp[0]=prices[0];
+        for (int i=1;i<prices.length;i++){
+            dp[i]=Math.min(dp[i-1],prices[i]);
+        }
+        int res=0;
+        for (int i=0;i<prices.length;i++){
+            res=Math.max(res,prices[i]-dp[i]);
+        }
+        return res;
+    }
+}
