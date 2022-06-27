@@ -8,6 +8,8 @@ public class ConvertSortedArrayToBinarySearchTree_108 {
 //采用递归
 //每次选数组中中间的数为二叉树的根结点（向下取整）
 //当low的值>high的值时，证明已经没有数字可以放至二叉树，返回null
+//每次把根结点对应数组索引左侧的最小值作为low，索引-1作为high，递归
+//每次把根结点对应数组索引左侧的最大值作为high，索引+1作为low，递归
 
 
 //      Definition for a binary tree node.
