@@ -1,0 +1,55 @@
+package day07;
+
+import java.util.Queue;
+import java.util.Stack;
+
+/**
+ * Created by liangyi on 2022/6/28.
+ */
+//155. 最小栈
+public class MinStack_155 {
+    //因为要求：能在常数时间内检索到最小元素的栈。因此不能在getMin时再去找最小值，最好是在push Or pop时就已经有最小值，引入辅助栈
+    private Stack<Integer> stack;
+    private Stack<Integer> minStack;
+
+
+    public MinStack_155() {
+        stack=new Stack<>();
+        minStack=new Stack<>();
+        //Integer.MAX_VALUE是Integer中的最大值
+        minStack.push(Integer.MAX_VALUE);
+    }
+
+
+    public void push(int val) {
+        stack.push(val);
+        //每次把栈和辅助栈中更小的值放进辅助栈里，使得每一个栈中元素都对应一个辅助栈中的最小值
+        minStack.push(Math.min(val,minStack.peek()));
+    }
+
+    public void pop() {
+        //栈中元素出栈时，辅助栈中对应的最小值也要出栈，保证每个元素对应辅助栈中的最小值
+        stack.pop();
+        minStack.pop();
+    }
+
+    public int top() {
+        //peek()函数只取栈顶元素，并不会将元素移除
+        return stack.peek();
+    }
+
+    public int getMin() {
+        //在push的过程中通过辅助栈已经得到了最小值，保证了在常数时间内获得到最小值
+        return minStack.peek();
+    }
+}
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.push(val);
+ * obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.getMin();
+ */
+}
