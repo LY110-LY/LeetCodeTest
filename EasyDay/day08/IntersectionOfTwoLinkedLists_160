@@ -1,0 +1,53 @@
+package easyday.day08;
+
+import java.util.HashSet;
+import java.util.Set;
+
+//160. 相交链表
+public class IntersectionOfTwoLinkedLists_160 {
+//注意，函数返回结果后，链表必须 保持其原始结构
+
+//      Definition for singly-linked list.
+      public class ListNode {
+          int val;
+          ListNode next;
+          ListNode(int x) {
+              val = x;
+              next = null;
+          }
+      }
+
+
+//    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+//          //用一个HashSet存储链表A的每一个结点
+//        //遍历链表B，当B中的结点存在于HashSet中时，后面的结点也都是相同的（题目就是这么设置的）
+//        Set<ListNode> intersection = new HashSet<>();
+//        ListNode test = headA;
+//        while (test!=null){
+//            intersection.add(test);
+//            test=test.next;
+//        }
+//        ListNode res = headB;
+//        while (res!=null){
+//            if (intersection.contains(res)){
+//                return res;
+//            }
+//            res=res.next;
+//        }
+//        return null;
+//        }
+
+//        方法2：双指针
+        public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+            if (headA==null||headB==null){
+                return null;
+            }
+            ListNode pA=headA;
+            ListNode pB=headB;
+            while (pA!=pB){
+                pA = pA==null ? headB : pA.next;
+                pB = pB==null ? headA : pB.next;
+            }
+            return pA;
+        }
+}
