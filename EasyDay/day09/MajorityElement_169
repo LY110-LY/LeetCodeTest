@@ -1,0 +1,19 @@
+package day09;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Created by liangyi on 2022/6/29.
+ */
+//169. 多数元素
+public class MajorityElement_169 {
+    public int majorityElement(int[] nums) {
+//        //因为必有一个数值是超过半数的，因此只要我们排序，取出中间位置的那个数值，就是最终的结果
+//        int len = nums.length;
+//        Arrays.sort(nums);
+//        return nums[len/2];
+
+
+    }
