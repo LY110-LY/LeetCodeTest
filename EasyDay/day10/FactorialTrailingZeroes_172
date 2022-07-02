@@ -1,0 +1,23 @@
+package day10;
+
+/**
+ * Created by liangyi on 2022/7/3.
+ */
+//172. 阶乘后的零
+public class FactorialTrailingZeroes_172 {
+    public int trailingZeroes(int n) {
+        //主要考虑数学方法，因为要计算尾数中0的个数
+        //当存在5的时候，就会有一个2*5得到一个0
+        //而当有一个10，10=2*5，15=3*5，且阶乘内的2的总数一定比5多
+        //因此，我们只需要考虑5的个数即可判断阶乘尾数0的个数
+        int res=0;
+        for (int i=5;i<=n;i+=5){
+            int t=i;
+            while (t%5==0){
+                res++;
+                t=t/5;
+            }
+        }
+        return res;
+    }
+}
