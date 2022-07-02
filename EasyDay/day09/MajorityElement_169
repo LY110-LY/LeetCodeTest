@@ -14,6 +14,29 @@ public class MajorityElement_169 {
 //        int len = nums.length;
 //        Arrays.sort(nums);
 //        return nums[len/2];
-
+        
+        //法2：用哈希表存储
+        Map<Integer, Integer> integerMap = compute(nums);
+        Map.Entry<Integer,Integer> mapRes = null;
+        for (Map.Entry<Integer, Integer> integerIntegerEntry : integerMap.entrySet()) {
+            if (integerIntegerEntry.getValue()>mapRes.getValue()||mapRes.getValue()==null){
+                mapRes=integerIntegerEntry;
+            }
+        }
+        return mapRes.getKey();
 
     }
+
+    private Map<Integer,Integer> compute(int[] nums){
+        Map<Integer,Integer> map=new HashMap<>();
+        for (int num : nums) {
+            if (map.containsKey(num)){
+                map.put(num,map.get(num)+1);
+            }else {
+                map.put(num,1);
+            }
+        }
+        return map;
+    }
+
+}
