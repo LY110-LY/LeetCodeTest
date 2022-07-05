@@ -1,0 +1,41 @@
+package day11;
+
+/**
+ * Created by liangyi on 2022/7/5.
+ */
+//203. 移除链表元素
+public class RemoveLinkedListElements_203 {
+
+
+     // Definition for singly-linked list.
+      public class ListNode {
+          int val;
+          ListNode next;
+          ListNode() {}
+          ListNode(int val) { this.val = val; }
+          ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+      }
+
+
+    public ListNode removeElements(ListNode head, int val) {
+        ListNode tl=head;
+        if(head==null){
+            return null;
+        }
+        while (tl.val==val){
+            head=head.next;
+            tl=head;
+            if(tl==null){
+                return null;
+            }
+        }
+        while (tl.next!=null){
+            if (tl.next.val==val){
+                tl.next=tl.next.next;
+            }else {
+                tl=tl.next;
+            }
+        }
+        return head;
+    }
+}
