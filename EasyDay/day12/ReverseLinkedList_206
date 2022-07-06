@@ -1,0 +1,41 @@
+package day12;
+
+/**
+ * Created by liangyi on 2022/7/6.
+ */
+//206. 反转链表
+public class ReverseLinkedList_206 {
+
+//      Definition for singly-linked list.
+    public class ListNode {
+          int val;
+          ListNode next;
+          ListNode() {}
+          ListNode(int val) { this.val = val; }
+          ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+      }
+
+    public ListNode reverseList(ListNode head) {
+////法1、迭代
+//        ListNode tl=head;
+//        ListNode pre=null;
+//        while (tl!=null){
+//            ListNode next = tl.next;
+//            tl.next=pre;
+//            pre=tl;
+//            tl=next;
+//        }
+//        return pre;
+
+        //法2、递归思路，真是神了,这个思路想到一半卡住了，自己没弄出来
+        //这里一定注意头结点向前指向空，避免成为环
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode tl=reverseList(head.next);
+        head.next.next=head;
+        head.next=null;
+        return tl;
+
+    }
+}
