@@ -1,0 +1,26 @@
+package day13;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Created by liangyi on 2022/7/7.
+ */
+//219. 存在重复元素 II
+public class ContainsDuplicateII_219 {
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        int len = nums.length;
+        Map<Integer,Integer> map = new HashMap<Integer,Integer>();
+        for (int i = 0; i <len ; i++) {
+            //key放的是值，value放的是索引
+            if (map.containsKey(nums[i])){
+                Integer index = map.get(nums[i]);
+                if (Math.abs(i-index)<=k){
+                    return true;
+                }
+            }
+            map.put(nums[i],i);
+        }
+        return false;
+    }
+}
