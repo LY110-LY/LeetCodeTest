@@ -1,0 +1,28 @@
+package day14;
+
+import com.sun.deploy.util.ArrayUtil;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+/**
+ * Created by liangyi on 2022/7/9.
+ */
+//283. 移动零
+public class MoveZeroes_283 {
+    public void moveZeroes(int[] nums) {
+        int len = nums.length;
+        //用temp记录0的个数，当temp=2时，意味着两个0碰在一起了，再遍历到数组后面时，不为0的数只需要和第一个0的位置交换即可，也就是i-temp的位置
+        int temp=0;
+        for (int i = 0; i < len; i++) {
+            if (nums[i]==0){
+                temp++;
+            }else {
+                if (temp>0){
+                    nums[i-temp]=nums[i];
+                    nums[i]=0;
+                }
+            }
+        }
+    }
+}
