@@ -1,0 +1,29 @@
+package day18;
+
+/**
+ * Created by liangyi on 2022/7/14.
+ */
+//661. 图片平滑器
+public class ImageSmoother_661 {
+    public int[][] imageSmoother(int[][] img) {
+        int rowlen = img.length;
+        int rollen = img[0].length;
+        int[][] res = new int[rowlen][rollen];
+        for (int i = 0; i < rowlen; i++) {
+            for (int j = 0; j < rollen; j++) {
+                int num=0;
+                int sum=0;
+                for (int k = i-1; k <= i+1; k++) {
+                    for (int l = j-1; l <= j+1; l++) {
+                        if (k>=0&&k<rowlen&&l>=0&&l<rollen){
+                            num++;
+                            sum+=img[k][l];
+                        }
+                    }
+                }
+                res[i][j]=sum/num;
+            }
+        }
+        return res;
+    }
+}
