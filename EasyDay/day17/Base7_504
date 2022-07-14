@@ -1,0 +1,40 @@
+package day17;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+/**
+ * Created by liangyi on 2022/7/14.
+ */
+//504. 七进制数
+public class Base7_504 {
+    public static String convertToBase7(int num) {
+        StringBuffer buffer = new StringBuffer();
+        Boolean flag=true;
+        int t=1;
+        if(num==0){
+            return "0";
+        }
+        if (num<0){
+            num=-1*num;
+            flag=false;
+        }
+        while (num!=0){
+            t = num%7;
+            num=num/7;
+            buffer.append(t);
+        }
+        if (flag==false){
+            buffer.append("-");
+        }
+        return buffer.reverse().toString();
+
+    }
+
+    public static void main(String[] args) {
+        int num=-7;
+        System.out.println(convertToBase7(num));
+    }
+}
