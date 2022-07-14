@@ -1,0 +1,24 @@
+package day17;
+
+import java.util.HashSet;
+import java.util.Set;
+
+/**
+ * Created by liangyi on 2022/7/14.
+ */
+//575. 分糖果
+public class DistributeCandies_575 {
+    public int distributeCandies(int[] candyType) {
+        Set<Integer> set = new HashSet<>();
+        for (int candy : candyType){
+            set.add(candy);
+        }
+        int num = candyType.length/2;
+        int len = set.size();
+        if (num>=len){
+            return len;
+        }else {
+            return num;
+        }
+    }
+}
