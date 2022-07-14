@@ -1,0 +1,31 @@
+package day17;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by liangyi on 2022/7/14.
+ */
+//665. 非递减数列
+public class NonDecreasingArray_665 {
+    public boolean checkPossibility(int[] nums) {
+        int res = 0;
+        for (int i = 1; i < nums.length; i++) {
+            //判断i和i-1大小
+            if (nums[i-1]>nums[i]){
+                //我们尽量保证去动i-1，因为不知道i后面的情况
+                if (i==1||nums[i]>=nums[i-2]){
+                    nums[i-1]=nums[i];
+                }else {
+                    nums[i]=nums[i-1];
+                }
+                if (++res>1){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
