@@ -1,0 +1,22 @@
+package easyday.day20;
+
+//1128. 等价多米诺骨牌对的数量
+public class NumberOfEquivalentDominoPairs_1128 {
+    public int numEquivDominoPairs(int[][] dominoes) {
+        //本体思路
+        //要认为两个数字是等价的，我们可以把它们转为一个两位正整数
+        //判断0位置和1位置上最小的数，让它来当十位数，大的数字当个位数，求和
+        //每次把这个结果存到一个数组中
+        //当有一样的数字出现两次时，res+1
+        int num;
+        int res=0;
+        //因为数字大小是1-9，所以最大的索引也就是90，100足够了
+        int[] sum = new int[100];
+        for (int[] domin:dominoes){
+            num = domin[0]<domin[1]?domin[0]*10+domin[1]:domin[1]*10+domin[0];
+            res+=sum[num];
+            sum[num]++;
+        }
+        return res;
+    }
+}
