@@ -1,0 +1,25 @@
+package day19;
+
+/**
+ * Created by liangyi on 2022/7/17.
+ */
+//821. 字符的最短距离
+public class ShortestDistanceToACharacter_821 {
+    public int[] shortestToChar(String s, char c) {
+        int len = s.length();
+        int[] res = new int[len];
+        for (int i = 0, index = Integer.MIN_VALUE; i < len; i++) {
+            if (s.charAt(i)==c){
+                index = i;
+            }
+            res[i] = i-index;
+        }
+        for (int i = len-1, index = Integer.MAX_VALUE; i >= 0; i--) {
+            if (s.charAt(i)==c){
+                index = i;
+            }
+            res[i] = Math.min(res[i],index - i);
+        }
+        return res;
+    }
+}
