@@ -1,0 +1,29 @@
+package day21;
+
+/**
+ * Created by liangyi on 2022/7/22.
+ */
+//面试题 17.09. 第 k 个数
+public class GetKthMagicNumberLCCI_Face1709 {
+    public int getKthMagicNumber(int k) {
+        //三个指针，记录每次找到的最小的一个丑数
+        int p1 = 0, p2 = 0, p3 = 0;
+        int[] num = new int[k+1];
+        num[0] = 1;
+        for (int i = 1; i <k ; i++) {
+            num[i] = Math.min(Math.min(num[p1]*3,num[p2]*5),num[p3]*7);
+            //考虑到15、21这种包含多个因子的
+            //要用if依次判断，而不能用if else，这样会多加一次
+            if (num[i]==num[p1]*3){
+                p1++;
+            }
+            if (num[i]==num[p2]*5){
+                p2++;
+            }
+            if (num[i]==num[p3]*7){
+                p3++;
+            }
+        }
+        return num[k-1];
+    }
+}
