@@ -1,0 +1,32 @@
+package Medium;
+
+import java.util.HashSet;
+import java.util.Set;
+
+/**
+ * Created by liangyi on 2022/7/24.
+ */
+//3. 无重复字符的最长子串
+public class LongestSubstringWithoutRepeatingCharacters_3 {
+    public int lengthOfLongestSubstring(String s) {
+        //HashSet保证元素不重复
+        Set<Character> set = new HashSet<>();
+        int len = s.length();
+        //滑动窗口解法
+        //左指针到右指针为一次最大不重复子串
+        //当右侧出现重复时，记录下当前的长度，然后左指针右移，记录每一个位置的最长不重复子串长度
+        //得出最大值作为结果
+        int res = 0,right = -1;
+        for (int i = 0; i <len ; i++) {
+            if (i != 0){
+                set.remove(s.charAt(i - 1));
+            }
+            while (right < len - 1 && !set.contains(s.charAt(right + 1))){
+                set.add(s.charAt(right + 1));
+                right++;
+            }
+            res = Math.max(res, right - i + 1);
+        }
+        return res;
+    }
+}
