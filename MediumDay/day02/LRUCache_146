@@ -1,0 +1,117 @@
+package Medium.day23;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Created by liangyi on 2022/7/26.
+ */
+//146. LRU 缓存
+public class LRUCache_146 {
+    public class LRUCache {
+
+        //定义双向链表
+        class DLinkedNode{
+            int key;
+            int value;
+            DLinkedNode prev;
+            DLinkedNode next;
+
+            public DLinkedNode() {
+            }
+
+            public DLinkedNode(int key, int value) {
+                this.key = key;
+                this.value = value;
+            }
+        }
+
+        //初始化一个HasMap
+        private Map<Integer, DLinkedNode> map = new HashMap<Integer, DLinkedNode>();
+        //初始化一个链表占用长度
+        private int size;
+        //初始化一个双向链表容量
+        private int capacity;
+        //初始化一个伪头结点和一个伪尾结点
+        //在双向链表的实现中，使用一个伪头部（dummy head）和伪尾部（dummy tail）标记界限，
+        // 这样在添加节点和删除节点的时候就不需要检查相邻的节点是否存在
+        private DLinkedNode head,tail;
+
+        public LRUCache(int capacity) {
+            this.size = 0;
+            this.capacity = capacity;
+            head = new DLinkedNode();
+            tail = new DLinkedNode();
+            head.next=tail;
+            tail.prev=head;
+
+        }
+
+        public int get(int key) {
+            //根据key从HashMap中取值先
+            DLinkedNode node = map.get(key);
+            if (node == null){
+                return -1;
+            }
+            //key存在，把双向链表中对应的值移到头部
+            moveToHead(node);
+            return node.value;
+
+        }
+
+        public void put(int key, int value) {
+            DLinkedNode node = map.get(key);
+            if (node == null){
+                //key不存在，创建一个新的节点
+                DLinkedNode dLinkedNode = new DLinkedNode(key, value);
+                //放到HashMap里
+                map.put(key, dLinkedNode);
+                //添加到双向链表的头部
+                addToHead(dLinkedNode);
+                //链表占用长度+1
+                ++size;
+                //判断链表占用长度是否超过链表容量
+                if (size > capacity){
+                    //超出容量，删除双向链表的尾部节点
+                    //同时要返回删除的节点，以便于在map中同时删除
+                    DLinkedNode tail = removeTail();
+                    //删除HashMap中对应的项
+                    map.remove(tail.key);
+                    //双向链表占用长度-1
+                    --size;
+                }
+            }else {
+                //key已经存在
+                //通过HashMap定位，修改对应的value，然后在双向链表中放至头部
+                node.value = value;
+                moveToHead(node);
+            }
+        }
+
+        private void moveToHead(DLinkedNode node) {
+            removeNode(node);
+            addToHead(node);
+        }
+
+        private DLinkedNode removeTail() {
+            //伪尾结点的前一个节点就是最后一个节点
+            DLinkedNode res = tail.prev;
+            removeNode(res);
+            return res;
+        }
+
+        private void removeNode(DLinkedNode dLinkedNode) {
+            dLinkedNode.prev.next = dLinkedNode.next;
+            dLinkedNode.next.prev = dLinkedNode.prev;
+        }
+
+
+        private void addToHead(DLinkedNode dLinkedNode) {
+            dLinkedNode.prev = head;
+            dLinkedNode.next = head.next;
+            head.next.prev = dLinkedNode;
+            head.next = dLinkedNode;
+        }
+    }
+
+}
